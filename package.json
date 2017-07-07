@@ -24,11 +24,10 @@
   ],
   "dependencies": {
     "babel-plugin-module-resolver": "^2.7.1",
-    "ble-packet-parser": "^0.1.0",
     "offline-plugin": "^4.6.1",
     "react": "~15.4.0",
     "react-native": "0.41.2",
-    "react-native-ble-manager": "^5.1.1",
+    "react-native-ble-plx": "^0.6.0",
     "react-native-i18n": "^1.0.0",
     "react-native-macos": "https://github.com/c-h-/react-native-macos.git",
     "react-native-vector-icons": "^4.0.0",

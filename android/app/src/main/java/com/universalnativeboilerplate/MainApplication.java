@@ -13,8 +13,8 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-// RN BLE Manager
-import it.innove.BleManagerPackage;
+// RN BLE
+import com.polidea.reactnativeble.BlePackage;
 
 // RN I18n
 import com.i18n.reactnativei18n.ReactNativeI18n;
@@ -32,7 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new ReactNativeI18n(),
-            new BleManagerPackage()
+            new BlePackage()
       );
     }
   };
