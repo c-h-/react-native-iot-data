@@ -6,11 +6,14 @@ import {
   getStore,
 } from 'Common/redux/store';
 import App from 'Common/components/App';
+import BLEManager from 'Common/components/BLEManager';
 
 const ProvidedApp = () => {
   return (
     <Provider store={getStore()}>
-      <App />
+      <BLEManager>
+        <App />
+      </BLEManager>
     </Provider>
   );
 };
