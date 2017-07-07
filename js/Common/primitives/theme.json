@@ -1,0 +1,7 @@
+{
+  "primary": "black",
+  "secondary": "#eee",
+  "emphasis": "blue",
+  "warn": "yellow",
+  "danger": "red"
+}
