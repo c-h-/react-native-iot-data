@@ -88,7 +88,7 @@ export default class BLEManager extends Component {
   }
 
   handleUpdateValueForCharacteristic = (data) => {
-    console.log(`Received data from ${data.peripheral} characteristic ${data.characteristic} ${data.value}`);
+    console.log(`Received data from ${data.peripheral} characteristic ${data.characteristic} ${data.value} ${Math.round(data.value[0] * data.value[1]) - 32768}`);
   }
 
   handleStopScan = () => {
@@ -114,6 +114,53 @@ export default class BLEManager extends Component {
       }
       peripherals.set(peripheral.id, peripheral);
       this.setState({ peripherals });
+      if (peripheral.name === 'IMUBLESketch') {
+        // HAVE ARDUINO PACKET
+        BleManager.connect(peripheral.id)
+          .then(() => {
+            const disconnect = () => {
+              BleManager.disconnect(peripheral.id)
+                .then(() => {
+                  console.log('Disconnected');
+                })
+                .catch((error) => {
+                  console.log(`Disconnect error ${error}`);
+                });
+            };
+            console.log(`Connected to ${peripheral.name}`);
+            BleManager.retrieveServices(peripheral.id)
+              .then((info) => {
+                console.log('Periph Info', info);
+                if (info && info.characteristics) {
+                  // heart beat service
+                  const tx = info.characteristics.find(characteristic => characteristic.service === '180d');
+                  if (tx && tx.characteristic === '2a37') {
+                    // found tx setup on device
+                    BleManager.startNotification(peripheral.id, tx.service, tx.characteristic)
+                      .then(() => {
+                        console.log(`Subscription started to ${tx.service} ${tx.characteristic}`);
+                        setTimeout(() => {
+                          disconnect();
+                        }, 10000);
+                      })
+                      .catch((error) => {
+                        console.log('Subscription error', error);
+                        disconnect();
+                      });
+                  }
+                  else {
+                    disconnect();
+                  }
+                }
+                else {
+                  disconnect();
+                }
+              });
+          })
+          .catch((error) => {
+            console.error('Connection error', error);
+          });
+      }
     }
   }
 
