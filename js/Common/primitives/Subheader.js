@@ -2,22 +2,23 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components/primitives';
 import theme from './theme.json';
 
-const StyledP = styled.Text`
+const StyledSubheader = styled.Text`
   color: ${props => (props.inverted ? theme.textInverted : theme.text)};
-  font-size: 16px;
-  margin-bottom: ${theme.pad};
+  font-size: 22px;
+  font-family: ${theme.font};
+  font-weight: ${theme.weight};
 `;
 
-const P = (props, context) => (
-  <StyledP
+
+const Subheader = (props, context) => (
+  <StyledSubheader
     inverted={context.inverted}
     {...props}
   />
 );
 
-P.contextTypes = {
+Subheader.contextTypes = {
   inverted: PropTypes.bool,
 };
 
-export default P;
-
+export default Subheader;

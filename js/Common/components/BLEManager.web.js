@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
+// get inspiration from
+// https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web
+// https://github.com/virgilvox/curie-web-ble/blob/master/main.js
 class BLEManager extends Component {
   static propTypes = {
     children: PropTypes.any,
@@ -74,7 +77,7 @@ class BLEManager extends Component {
   }
 
   render() {
-    return this.props.children;
+    return this.props.children || null;
   }
 }
 

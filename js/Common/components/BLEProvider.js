@@ -181,7 +181,7 @@ export default class BLEProvider extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{ flexGrow: 1, flexShrink: 1 }}>
         <BLEManager
           ref={ref => (this.manager = ref)}
           discoveredPeripheral={this.handleDiscoverPeripheral}

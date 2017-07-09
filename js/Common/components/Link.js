@@ -25,6 +25,7 @@ class Link extends Component {
     href: PropTypes.string,
     style: PropTypes.any,
     containerStyle: PropTypes.any,
+    back: PropTypes.bool,
   }
   getAction = () => {
     const {
@@ -42,6 +43,7 @@ class Link extends Component {
     return null;
   }
   handlePress = (e) => {
+    console.log('Link click!');
     if (e && e.preventDefault) { // stop web links from changing page
       e.preventDefault();
     }
@@ -63,20 +65,11 @@ class Link extends Component {
       containerStyle,
     } = this.props;
     let toRender = children;
-    if (Array.isArray(children)) {
-      toRender = (
-        <View style={style}>
-          {children}
-        </View>
-      );
-    }
-    else if (typeof children === 'string') {
-      toRender = (
-        <Text style={style}>
-          {children}
-        </Text>
-      );
-    }
+    toRender = (
+      <View style={style}>
+        {children}
+      </View>
+    );
     let CompToRender = TouchableHighlight;
     const extraProps = {};
     if (Platform.OS === 'web') {
@@ -85,14 +78,13 @@ class Link extends Component {
       extraProps.accessibilityRole = 'link';
       extraProps.href = getURIForAction(this.getAction() || {});
     }
-    console.log('HREF', extraProps, this.getAction());
     return (
       <CompToRender
         onPress={this.handlePress}
         style={containerStyle}
         {...extraProps}
       >
-        { toRender }
+        {toRender}
       </CompToRender>
     );
   }
