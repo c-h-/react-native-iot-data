@@ -114,7 +114,7 @@ export default class BLEManager extends Component {
       }
       peripherals.set(peripheral.id, peripheral);
       this.setState({ peripherals });
-      if (peripheral.name === 'IMUBLESketch') {
+      if (peripheral.name === 'IMUBLESketch3') {
         // HAVE ARDUINO PACKET
         BleManager.connect(peripheral.id)
           .then(() => {
@@ -133,20 +133,46 @@ export default class BLEManager extends Component {
                 console.log('Periph Info', info);
                 if (info && info.characteristics) {
                   // heart beat service
-                  const tx = info.characteristics.find(characteristic => characteristic.service === '180d');
-                  if (tx && tx.characteristic === '2a37') {
-                    // found tx setup on device
-                    BleManager.startNotification(peripheral.id, tx.service, tx.characteristic)
-                      .then(() => {
-                        console.log(`Subscription started to ${tx.service} ${tx.characteristic}`);
-                        setTimeout(() => {
-                          disconnect();
-                        }, 10000);
-                      })
-                      .catch((error) => {
-                        console.log('Subscription error', error);
-                        disconnect();
-                      });
+                  const txcs = info.characteristics.filter(characteristic => characteristic.service === '19B10000-E8F2-537E-4F6C-D104768A1216'.toLowerCase());
+                  const chars = [
+                    '5667f3b1-d6a2-4fb2-a917-4bee580a9c84',
+                    '5667f3b1-d6a2-4fb2-a917-4bee580a9c85',
+                    '5667f3b1-d6a2-4fb2-a917-4bee580a9c86',
+                    '5667f3b1-d6a2-4fb2-a917-4bee580a9c87',
+                    '5667f3b1-d6a2-4fb2-a917-4bee580a9c88',
+                    '5667f3b1-d6a2-4fb2-a917-4bee580a9c89',
+                  ];
+                  const toSubscribe = [];
+                  const finish = () => {
+                    setTimeout(() => {
+                      disconnect();
+                    }, 10000);
+                  };
+                  txcs.forEach((tx) => {
+                    if (chars.includes(tx.characteristic)) {
+                      toSubscribe.push([peripheral.id, tx.service, tx.characteristic]);
+                    }
+                  });
+                  if (toSubscribe.length) {
+                    console.log('started subscribe loop');
+                    const next = () => {
+                      if (toSubscribe.length) {
+                        const tx = toSubscribe.pop();
+                        BleManager.startNotification(...tx)
+                          .then(() => {
+                            console.log(`Subscription started to ${tx.service} ${tx.characteristic}`);
+                            next();
+                          })
+                          .catch((error) => {
+                            console.log('Subscription error', error);
+                            next();
+                          });
+                      }
+                      else {
+                        finish();
+                      }
+                    };
+                    next();
                   }
                   else {
                     disconnect();
