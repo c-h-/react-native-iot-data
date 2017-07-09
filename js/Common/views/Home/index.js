@@ -49,13 +49,13 @@ const Home = () => {
         </P>
         <Toolbar>
           <Button
-            href={'pages'}
+            href={'auth/register'}
             secondary
           >
             Sign Up
           </Button>
           <Button
-            href={'pages'}
+            href={'auth/login'}
             icon="forward"
           >
             Sign In

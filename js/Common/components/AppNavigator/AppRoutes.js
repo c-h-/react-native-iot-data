@@ -6,7 +6,7 @@ import Icon from 'Common/components/Icon';
 
 import Home from 'Common/views/Home';
 import Pages from 'Common/views/Pages';
-import BuildingBlocks from 'Common/views/BuildingBlocks';
+import Auth from 'Common/views/Auth';
 import NotFound from 'Common/views/NotFound';
 
 export const notFoundKey = 'NotFound';
@@ -35,7 +35,7 @@ const getIcon = (name) => {
 export const AppRoutes = {
   home: {
     screen: Home,
-    path: 'editor',
+    path: 'home',
     navigationOptions: {
       title: 'Welcome',
       stack: {
@@ -55,13 +55,24 @@ export const AppRoutes = {
       },
     },
   },
-  'building-blocks': {
-    screen: BuildingBlocks,
-    path: 'building-blocks',
+  'auth/register': {
+    screen: Auth,
+    path: 'auth/register',
     navigationOptions: {
-      title: 'Translation',
+      title: 'Sign Up',
       stack: {
-        label: 'Translation',
+        label: 'Sign Up',
+        icon: getIcon('translate'),
+      },
+    },
+  },
+  'auth/login': {
+    screen: Auth,
+    path: 'auth/login',
+    navigationOptions: {
+      title: 'Sign In',
+      stack: {
+        label: 'Sign In',
         icon: getIcon('translate'),
       },
     },

@@ -47,7 +47,6 @@ const Button = ({
   secondary,
   children,
 }, context) => {
-  console.log('CONTEXT', context);
   const passProps = {
     inverted: context.inverted,
     secondary,
