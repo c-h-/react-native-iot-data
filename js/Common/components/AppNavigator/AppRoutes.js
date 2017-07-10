@@ -5,7 +5,7 @@ import React, {
 import Icon from 'Common/components/Icon';
 
 import Home from 'Common/views/Home';
-import Pages from 'Common/views/Pages';
+import Dash from 'Common/views/Dash';
 import Auth from 'Common/views/Auth';
 import NotFound from 'Common/views/NotFound';
 
@@ -44,9 +44,9 @@ export const AppRoutes = {
       },
     },
   },
-  pages: {
-    screen: Pages,
-    path: 'pages',
+  dash: {
+    screen: Dash,
+    path: 'dash',
     navigationOptions: {
       title: 'Icons',
       stack: {

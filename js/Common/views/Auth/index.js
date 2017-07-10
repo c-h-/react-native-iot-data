@@ -6,7 +6,7 @@ import P from 'Common/primitives/P';
 import UIContainer from 'Common/primitives/UIContainer';
 import Button from 'Common/primitives/Button';
 import Toolbar from 'Common/primitives/Toolbar';
-import Text from 'Common/primitives/Text';
+import TextInput from 'Common/primitives/TextInput';
 
 class Auth extends Component {
   state = {
@@ -35,7 +35,7 @@ class Auth extends Component {
           <Header>Hello.</Header>
         </UIContainer>
         <UIContainer>
-          <Text
+          <TextInput
             value={email}
             onChange={this.updateVal('email')}
             label="Email"
@@ -44,7 +44,7 @@ class Auth extends Component {
             autoCorrect={false}
             autoFocus
           />
-          <Text
+          <TextInput
             value={password}
             onChange={this.updateVal('password')}
             label="Password"
