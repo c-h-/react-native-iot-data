@@ -1,18 +1,15 @@
 import React, {
   PropTypes,
 } from 'react';
-import {
-  View,
-} from 'react-native';
 import styled from 'styled-components/primitives';
 import Header from 'Common/primitives/Header';
 import P from 'Common/primitives/P';
 import UIContainer from 'Common/primitives/UIContainer';
 import Button from 'Common/primitives/Button';
 import Toolbar from 'Common/primitives/Toolbar';
+import Page from 'Common/primitives/Page';
 
 import theme from 'Common/primitives/theme.json';
-import styles from './styles';
 
 const photos = {
   hammock: 'https://images.unsplash.com/photo-1474022650697-7624c32312fa?dpr=2&auto=format&fit=crop&w=1080&h=720&q=80&cs=tinysrgb&crop=',
@@ -34,7 +31,7 @@ const HeroImage = styled.Image`
 
 const Home = () => {
   return (
-    <View style={styles.container}>
+    <Page>
       <HeroContainer>
         <HeroImage
           source={{ uri: photos.coffee }}
@@ -45,7 +42,7 @@ const Home = () => {
           Welcome
         </Header>
         <P>
-          Get insight into your sleeping life by getting started.
+          Get insight into your sleeping life.
         </P>
         <Toolbar>
           <Button
@@ -62,7 +59,7 @@ const Home = () => {
           </Button>
         </Toolbar>
       </UIContainer>
-    </View>
+    </Page>
   );
 };
 

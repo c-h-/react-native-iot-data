@@ -5,7 +5,8 @@ import theme from './theme.json';
 const Container = styled.View`
   flex: 1;
   align-self: stretch;
-  align-items: center;
+  align-items: stretch;
+  justify-content: center;
   background-color: ${props => (props.inverted ? theme.primary : theme.textInverted)}
 `;
 
@@ -19,6 +20,7 @@ class UIContainer extends Component {
   static propTypes = {
     children: PropTypes.any,
     containerStyle: PropTypes.object,
+    style: PropTypes.object,
     inverted: PropTypes.bool,
   }
   static childContextTypes = {
@@ -36,11 +38,12 @@ class UIContainer extends Component {
     const {
       inverted,
       containerStyle,
+      style,
       children,
     } = this.props;
     return (
       <Container inverted={inverted} style={containerStyle}>
-        <InnerContainer>
+        <InnerContainer style={style}>
           {children || null}
         </InnerContainer>
       </Container>

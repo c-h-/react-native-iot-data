@@ -13,7 +13,7 @@ import styles from './styles';
 class CustomStackHeader extends PureComponent {
   static propTypes = {
     navigation: PropTypes.object,
-    router: PropTypes.object,
+    // router: PropTypes.object,
     stackOptions: PropTypes.object,
   }
   static _renderBackButton(index) {
@@ -21,17 +21,17 @@ class CustomStackHeader extends PureComponent {
       return null;
     }
     return (
-      <Link>Back</Link>
+      <Link back>Back</Link>
     );
   }
   render() {
     const {
       navigation,
-      router,
+      // router,
       stackOptions,
     } = this.props;
     const index = navigation && navigation.state ? navigation.state.index : 0;
-    
+
     const style = stackOptions && stackOptions.style ? stackOptions.style : null;
     return (
       <View

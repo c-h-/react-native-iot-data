@@ -7,6 +7,7 @@ const StyledSubheader = styled.Text`
   font-size: 22px;
   font-family: ${theme.font};
   font-weight: ${theme.weight};
+  margin-bottom: ${theme.pad};
 `;
 
 

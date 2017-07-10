@@ -3,22 +3,10 @@ import styled from 'styled-components/primitives';
 import Link from 'Common/components/Link';
 import Icon from 'Common/components/Icon';
 
+import { getColor, getContrast } from './helpers';
+
 import theme from './theme.json';
 
-function getContrast(strong = true) {
-  return strong ? theme.primary : theme.textInverted;
-}
-
-function getColor(props, foreground = true) {
-  const {
-    secondary,
-    inverted,
-  } = props;
-  const realInversion = foreground ? inverted : !inverted;
-  const strong = realInversion ? getContrast(true) : getContrast(false);
-  const weak = realInversion ? getContrast(false) : getContrast(true);
-  return secondary ? weak : strong;
-}
 
 const StyledView = styled.View`
   flex: 1;
@@ -40,12 +28,12 @@ const StyledText = styled.Text`
 `;
 
 const Button = ({
-  href,
   style,
   containerStyle,
   icon,
   secondary,
   children,
+  ...props
 }, context) => {
   const passProps = {
     inverted: context.inverted,
@@ -53,8 +41,8 @@ const Button = ({
   };
   return (
     <Link
-      href={href}
       containerStyle={[{ flexGrow: 1, flexShrink: 1, height: 3 * theme.unit }, containerStyle]}
+      {...props}
     >
       <StyledView
         style={style}
