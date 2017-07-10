@@ -43,7 +43,6 @@ class Link extends Component {
     return null;
   }
   handlePress = (e) => {
-    console.log('Link click!');
     if (e && e.preventDefault) { // stop web links from changing page
       e.preventDefault();
     }

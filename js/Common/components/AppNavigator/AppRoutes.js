@@ -7,6 +7,7 @@ import Icon from 'Common/components/Icon';
 import Home from 'Common/views/Home';
 import Dash from 'Common/views/Dash';
 import Auth from 'Common/views/Auth';
+import Intro from 'Common/views/Intro';
 import NotFound from 'Common/views/NotFound';
 
 export const notFoundKey = 'NotFound';
@@ -51,6 +52,17 @@ export const AppRoutes = {
       title: 'Icons',
       stack: {
         label: 'Icons',
+        icon: getIcon('view-module'),
+      },
+    },
+  },
+  'session/intro': {
+    screen: Intro,
+    path: 'session/intro',
+    navigationOptions: {
+      title: 'Session Intro',
+      stack: {
+        label: 'Session Intro',
         icon: getIcon('view-module'),
       },
     },

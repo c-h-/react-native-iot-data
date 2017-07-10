@@ -58,7 +58,7 @@ class Auth extends Component {
               Back
             </Button>
             <Button
-              href={'dash'}
+              href="dash"
               icon="forward"
             >
               Get Started
